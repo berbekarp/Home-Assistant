@@ -10,7 +10,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 💡 [Light card](cards/light.md)
 - 🔒 [Lock card](cards/lock.md)
 
-## Python Szkriptek és Kiegészítők
+# 🐍⚙️ Python Szkriptek és Kiegészítők
 
 Ez a repó egyedi Python szkripteket és javításokat (quirk) is tartalmaz az okosotthon rendszerhez, tematikusan mappákba rendezve:
 
