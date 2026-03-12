@@ -304,3 +304,10 @@ theme: visionos
 cards: []
 top_margin: false
 dense_section_placement: true
+```
+
+### 4. Feltételes Megjelenítés (Animáció)
+
+A fix navigációs kártya egy különálló, dedikált alnézetre:
+
+![Feltételes kártya működése](../images/lights_dashboard.png)
