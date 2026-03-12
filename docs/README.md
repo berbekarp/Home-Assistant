@@ -2,10 +2,10 @@
 
 Különböző kártyák érhetők el különböző entitások számára:
 
-- 🔋 [Battery card](cards/battery.md)
-- 💡 [Light card](cards/light.md)
-- 🔒 [Door/Window Lock sensor card](cards/door_window_lock_sensor.md)
-- 🌊 [Water sensor card](cards/water_sensor.md)
+- 🔋 [Battery card](docs/cards/battery.md)
+- 💡 [Light card](docs/cards/light.md)
+- 🔒 [Door/Window Lock sensor card](docs/cards/door_window_lock_sensor.md)
+- 🌊 [Water sensor card](docs/cards/water_sensor.md)
 
 # 🐍⚙️ Python Szkriptek és Kiegészítők
 
