@@ -1,14 +1,10 @@
 # 🍄 Home Assistant Mushroom cards
 
-
 Különböző kártyák érhetők el különböző entitások számára:
 
-- 🌡 [Climate card](cards/climate.md)
-- 🪄 [Entity card](cards/entity.md)
 - 🔋 [Battery card](cards/battery.md)
-- 💧 [Humidifier card](cards/humidifier.md)
 - 💡 [Light card](cards/light.md)
-- 🔒 [Lock card](cards/lock.md)
+- 🔒 [Door/Window Lock sensor card](cards/door_window_lock_sensor.md)
 - 🌊 [Water sensor card](cards/water_sensor.md)
 
 # 🐍⚙️ Python Szkriptek és Kiegészítők
