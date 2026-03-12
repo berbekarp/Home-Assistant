@@ -9,6 +9,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 💧 [Humidifier card](cards/humidifier.md)
 - 💡 [Light card](cards/light.md)
 - 🔒 [Lock card](cards/lock.md)
+- 🌊 [Water sensor card](cards/water_sensor.md)
 
 # 🐍⚙️ Python Szkriptek és Kiegészítők
 
