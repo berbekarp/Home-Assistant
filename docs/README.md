@@ -1,4 +1,4 @@
-# 🍄 Mushroom cards
+# 🍄 Home Assistant Mushroom cards
 
 
 Különböző kártyák érhetők el különböző entitások számára:
