@@ -1,13 +1,12 @@
 # 🍄 Mushroom cards
 
 
-Different cards are available for differents entities :
+Különböző kártyák érhetők el különböző entitások számára:
 
-- 🚨 [Alarm card](docs/cards/alarm-control-panel.md)
-- 🌡 [Climate card](docs/cards/climate.md)
-- 🪄 [Entity card](docs/cards/entity.md)
-- 💨 [Fan card](docs/cards/fan.md)
-- 💧 [Humidifier card](docs/cards/humidifier.md)
+- 🌡 [Climate card](cards/climate.md)
+- 🪄 [Entity card](cards/entity.md)
+- 💨 [Fan card](cards/fan.md)
+- 💧 [Humidifier card](cards/humidifier.md)
 - 💡 [Light card](cards/light.md)
-- 🔒 [Lock card](docs/cards/lock.md)
+- 🔒 [Lock card](cards/lock.md)
 
