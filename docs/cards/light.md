@@ -39,13 +39,18 @@ Az alábbi képeken látható, hogyan néz ki a kártya a Home Assistant felüle
 
 Amikor a lámpa le van kapcsolva, a kártya szürkén jelenik meg, jelezve az inaktív állapotot.
 
+![Kikapcsolt állapot](../images/lights_off.png)
+
 ### 2. Bekapcsolt állapot
 
 Felkapcsoláskor a kártya és az ikon színe megváltozik (`use_light_color`), alkalmazkodva a lámpa aktuális beállításaihoz.
+![Bekapcsolt állapot](../images/lights_on.png)
 
 ### 3. Fényerő és Színhőmérséklet szabályozása
 
 A bekapcsolt extráknak köszönhetően (`show_brightness_control` és `show_color_temp_control`) a kártya felületén közvetlenül állítható a fényerő és a színhőmérséklet.
+
+![Fényerő és színhőmérséklet](../images/lights_brightness.png)
 
 ---
 
@@ -180,3 +185,9 @@ card:
         }
 
 ```
+
+### 4. Feltételes Megjelenítés (Animáció)
+
+Az alábbi animáción látható, ahogy a kártya dinamikusan előtűnik a felületen a lámpa felkapcsolásakor, majd lekapcsoláskor ismét elrejtőzik.
+
+![Feltételes kártya működése](../images/hidden_lights_card.gif)
