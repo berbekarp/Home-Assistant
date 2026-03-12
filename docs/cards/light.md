@@ -88,7 +88,8 @@ grid_options:
 ```yaml
 type: conditional
 conditions:
-  - entity: light.kitchen_lights
+  - condition: state
+    entity: light.kitchen_lights
     state: "on"
 card:
   type: custom:mushroom-light-card
