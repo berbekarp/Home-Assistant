@@ -1,3 +1,5 @@
+# Lights card:
+
 type: custom:mushroom-light-card
 entity: light.kitchen_lights
 name: Konyha
