@@ -306,7 +306,7 @@ top_margin: false
 dense_section_placement: true
 ```
 
-### 4. Feltételes Megjelenítés (Animáció)
+### Feltételes Megjelenítés (Animáció)
 
 A fix navigációs kártya egy különálló, dedikált alnézetre:
 
