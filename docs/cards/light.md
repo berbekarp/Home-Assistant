@@ -191,3 +191,116 @@ card:
 Az alábbi animáción látható, ahogy a kártya dinamikusan előtűnik a felületen a lámpa felkapcsolásakor, majd lekapcsoláskor ismét elrejtőzik.
 
 ![Feltételes kártya működése](../images/hidden_lights_card.gif)
+
+---
+
+## Teljes Világítás Dashboard (Alnézet)
+
+Az előző szakaszban bemutatott fix navigációs kártya egy különálló, dedikált alnézetre (`/dashboard-lightsl`) mutat. Ez az oldal összegyűjti a ház összes világítását egy átlátható, szobák szerint csoportosított nézetben.
+
+A felület a Home Assistant modern `sections` (Szekciók) elrendezését használja, a kártyák pedig az eddig megismert `mushroom-light-card` sablonra épülnek. A dizájnt a `visionos` téma és egy letisztult, Markdown kártyából álló fejléc teszi teljessé.
+
+### A teljes nézet (View) YAML konfigurációja:
+
+```yaml
+title: Home
+sections:
+  - type: grid
+    cards:
+      - type: custom:mushroom-light-card
+        entity: light.kitchen_lights
+        name: Konyha
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+      - type: custom:mushroom-light-card
+        entity: light.hall_all
+        name: Előszoba
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+      - type: custom:mushroom-light-card
+        entity: light.bathroom_light
+        name: Fürdőszoba
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+      - type: custom:mushroom-light-card
+        entity: light.wc_lights
+        name: WC
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+        grid_options:
+          columns: 12
+          rows: 1
+  - type: grid
+    cards:
+      - type: custom:mushroom-light-card
+        entity: light.llivingroom_all
+        name: Nappali összes
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+      - type: custom:mushroom-light-card
+        entity: light.livingroom_allo_lights
+        name: Nappali Álló
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+      - type: custom:mushroom-light-card
+        entity: light.livingroom_plafon_lights
+        name: Nappali Plafon
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+  - type: grid
+    cards:
+      - type: custom:mushroom-light-card
+        entity: light.childroom_lights
+        name: Gyerekszoba
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+      - type: custom:mushroom-light-card
+        entity: light.bedroom_lights
+        name: Hálószoba
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+      - type: custom:mushroom-light-card
+        entity: light.all_lights
+        name: All lights
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_temp_control: true
+        use_light_color: true
+        layout: horizontal
+header:
+  card:
+    type: markdown
+    content: "# Világítás"
+type: sections
+max_columns: 3
+theme: visionos
+cards: []
+top_margin: false
+dense_section_placement: true
