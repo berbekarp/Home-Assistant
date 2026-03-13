@@ -13,9 +13,13 @@ Mivel ez a kártya specifikus LG szenzorokra épül, az alábbiak beállítása 
 
 ## Előnézet
 
-**1. Kikapcsolt / Alapállapot:** ![Mosógép kikapcsolva](../images/washing_machine_01.png)
+**1. Kikapcsolt / Alapállapot:
 
-**2. Mosás közben (Részletes infókkal):** ![Mosógép működés közben](../images/washing_machine_02.png)
+** ![Mosógép kikapcsolva](../images/washing_machine_01.png)
+
+**2. Mosás közben (Részletes infókkal):
+
+** ![Mosógép működés közben](../images/washing_machine_02.png)
 
 ---
 
