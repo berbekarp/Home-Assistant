@@ -114,5 +114,4 @@ card:
           box-shadow: 0 0 10px rgb(var(--sonar-color));
           display: {{ 'block' if is_state(config.entity, 'on') else 'none' }};
         }
-
 ```
