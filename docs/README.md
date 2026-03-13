@@ -6,6 +6,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 💡 [Light card](cards/light.md)
 - 🚪 [Door/Window Lock sensor card](cards/door_window_lock_sensor.md)
 - 🌊 [Water sensor card](cards/water_sensor.md)
+- 🚶‍♂️ [Motion / Occupancy sensor card](cards/motion_sensor.md)
 
 ## 🐍⚙️ Python Szkriptek és Kiegészítők
 
