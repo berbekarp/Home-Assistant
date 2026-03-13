@@ -7,6 +7,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 🚪 [Door/Window Lock sensor card](cards/door_window_lock_sensor.md)
 - 🌊 [Water sensor card](cards/water_sensor.md)
 - 🚶‍♂️ [Motion / Occupancy sensor card](cards/motion_sensor.md)
+- 🧺 [Washing Machine cards](cards/washing_machine.md)
 
 ## 🐍⚙️ Python Szkriptek és Kiegészítők
 
