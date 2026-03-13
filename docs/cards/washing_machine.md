@@ -20,6 +20,7 @@ Mivel ez a kártya specifikus LG szenzorokra épül, az alábbiak beállítása 
 **2. Mosás közben (Részletes infókkal + animálás):** 
 
 ![Mosógép működés közben](../images/washing_machine_02.png)
+
 ![Mosógép működés közben](../images/washing_machine.gif)
 
 ---
