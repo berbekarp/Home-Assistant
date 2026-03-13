@@ -12,6 +12,14 @@ A rendszer felépítéséhez az alábbi **HACS (Home Assistant Community Store)*
 
 ---
 
+## Előnézet (Animáció)
+
+Az alábbi animáción látható a rendszer működés közben, amint a főmenü gombjainak megérintésekor elegánsan felugranak az adott szobához tartozó, részletes fűtésvezérlő panelek és grafikonok:
+
+![Fűtés animáció](../images/heating_popups.gif)
+
+---
+
 ## 1. Főmenü (Vízszintes Gombsor)
 
 Ez a kártya kerüljön a dashboardod látható részére (pl. a fűtés szekció tetejére). Ez tartalmazza a gombokat, amelyek meghívják a rejtett pop-up ablakokat a hash linkek (`#bedroom`, `#childroom`, `#livingroom`) segítségével. A CSS formázásnak köszönhetően a gombok átlátszó hátteret kapnak és balra igazodnak.
