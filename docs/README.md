@@ -9,6 +9,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 🚶‍♂️ [Motion / Occupancy sensor card](cards/motion_sensor.md)
 - 🧺 [Washing Machine cards](cards/washing_machine.md)
 - 📅 [Family Calendar card](cards/calendar.md)
+- 🌡️ [Heating Pop-ups (Bubble Card)](cards/heating_popups.md)
 
 ## 🐍⚙️ Python Szkriptek és Kiegészítők
 
