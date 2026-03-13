@@ -17,9 +17,10 @@ Mivel ez a kártya specifikus LG szenzorokra épül, az alábbiak beállítása 
 
 ![Mosógép kikapcsolva](../images/washing_machine_01.png)
 
-**2. Mosás közben (Részletes infókkal):** 
+**2. Mosás közben (Részletes infókkal + animálás):** 
 
 ![Mosógép működés közben](../images/washing_machine_02.png)
+![Mosógép működés közben](../images/washing_machine.gif)
 
 ---
 
@@ -66,26 +67,27 @@ color: >-
   {% endif %}
 features_position: bottom
 card_mod:
-  style:
-    mushroom-shape-icon$: |
-      ha-icon {
-        {% if states('sensor.mosogep_error_state') != 'OK' and states('sensor.mosogep_error_state') not in ['unknown', 'unavailable'] %}
-          animation: pulse-red 1s infinite;
-        {% elif is_state(config.entity, 'on') %}
-          animation: wash 1s ease-in-out infinite;
-        {% endif %}
-      }
-      @keyframes wash {
-        0%, 100% { transform: rotate(0deg); }
-        25% { transform: rotate(-12deg) scale(1.05); }
-        50% { transform: rotate(0deg) scale(1); }
-        75% { transform: rotate(12deg) scale(1.05); }
-      }
-      @keyframes pulse-red {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); color: darkred; }
-        100% { transform: scale(1); }
-      }
+  style: |
+    ha-state-icon, ha-icon {
+      transform-origin: center;
+      display: inline-block;
+      {% if states('sensor.mosogep_error_state') != 'OK' and states('sensor.mosogep_error_state') not in ['unknown', 'unavailable'] %}
+        animation: pulse-red 1s infinite;
+      {% elif is_state(config.entity, 'on') %}
+        animation: wash 1.2s ease-in-out infinite;
+      {% endif %}
+    }
+    @keyframes wash {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-15deg) scale(1.05); }
+      50% { transform: rotate(0deg) scale(1); }
+      75% { transform: rotate(15deg) scale(1.05); }
+    }
+    @keyframes pulse-red {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); color: darkred; filter: drop-shadow(0 0 5px red); }
+      100% { transform: scale(1); }
+    }
 grid_options:
   columns: full
   rows: 1
