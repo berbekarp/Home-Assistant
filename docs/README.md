@@ -8,6 +8,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 🌊 [Water sensor card](cards/water_sensor.md)
 - 🚶‍♂️ [Motion / Occupancy sensor card](cards/motion_sensor.md)
 - 🧺 [Washing Machine cards](cards/washing_machine.md)
+- 📅 [Family Calendar card](cards/calendar.md)
 
 ## 🐍⚙️ Python Szkriptek és Kiegészítők
 
