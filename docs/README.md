@@ -10,6 +10,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 🧺 [Washing Machine cards](cards/washing_machine.md)
 - 📅 [Family Calendar card](cards/calendar.md)
 - 🌡️ [Heating Pop-ups (Bubble Card)](cards/heating_popups.md)
+- 🌡️ [Klíma és Páratartalom Vezérlő (Fülekkel)](cards/climate_tabs.md)
 - 🍓 [System Monitor (Raspberry Pi 5)](cards/system_monitor.md)
 
 ## 🐍⚙️ Python Szkriptek és Kiegészítők
