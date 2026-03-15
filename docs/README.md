@@ -13,7 +13,7 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 🌡️ [Klíma és Páratartalom Vezérlő (Fülekkel)](cards/climate_tabs.md)
 - 🍓 [System Monitor (Raspberry Pi 5)](cards/system_monitor.md)
 - 🖥️ [Rendszerfelügyelet Dashboard (Fülekkel)](cards/system_monitor_tabs.md)
-
+- 🚀 [Hálózati Sebességteszt (SpeedTest) Grafikon](cards/speedtest_graph.md)
 
 
 ## 🐍⚙️ Python Szkriptek és Kiegészítők
