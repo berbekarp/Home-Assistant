@@ -12,6 +12,9 @@ Különböző kártyák érhetők el különböző entitások számára:
 - 🌡️ [Heating Pop-ups (Bubble Card)](cards/heating_popups.md)
 - 🌡️ [Klíma és Páratartalom Vezérlő (Fülekkel)](cards/climate_tabs.md)
 - 🍓 [System Monitor (Raspberry Pi 5)](cards/system_monitor.md)
+- 🖥️ [Rendszerfelügyelet Dashboard (Fülekkel)](cards/system_monitor_tabs.md)
+
+
 
 ## 🐍⚙️ Python Szkriptek és Kiegészítők
 
