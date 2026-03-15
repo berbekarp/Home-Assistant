@@ -47,7 +47,7 @@ cards:
   - type: custom:mushroom-template-card
     primary: Rendszerfelügyelet
     icon: mdi:raspberry-pi
-    color: '#E30B5C'
+    color: "#E30B5C"
     features_position: bottom
     grid_options:
       columns: 12
@@ -104,7 +104,7 @@ cards:
             }
             @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
       
-      # 2. GOMB: TÁRHELY & RAM
+      # 2. GOMB: MEMÓRIA & LEMEZ
       - type: template
         icon: mdi:harddisk
         content: Tárhely & RAM
@@ -160,7 +160,7 @@ cards:
               padding-left: 15px !important;
             }
 
-      # 4. GOMB: ZIGBEE (SLZB)
+      # 4. GOMB: ZIGBEE
       - type: template
         icon: mdi:zigbee
         content: Zigbee
@@ -199,7 +199,6 @@ cards:
     card:
       type: vertical-stack
       cards:
-        # --- CPU HŐMÉRSÉKLET ---
         - type: custom:vertical-stack-in-card
           card_mod:
             style: |
@@ -207,7 +206,8 @@ cards:
           cards:
             - type: custom:mushroom-entity-card
               entity: sensor.system_monitor_processzor_homerseklet
-              tap_action: { action: more-info }
+              tap_action:
+                action: more-info
               icon: mdi:thermometer
               name: CPU Hőmérséklet
               primary_info: state
@@ -249,7 +249,12 @@ cards:
                 - sensor.system_monitor_processzor_homerseklet
               hours_to_show: 24
               line_width: 4
-              show: { name: false, icon: false, state: false, labels: false, legend: false }
+              show:
+                name: false
+                icon: false
+                state: false
+                labels: false
+                legend: false
               color_thresholds:
                 - value: 30
                   color: blue
@@ -263,11 +268,10 @@ cards:
                     background: none !important; box-shadow: none !important; border: none !important;
                     opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important;
                   }
-
-        # --- CPU HASZNÁLAT ---
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_processzor_hasznalat
-          tap_action: { action: more-info }
+          tap_action:
+            action: more-info
           icon: mdi:cpu-64-bit
           icon_color: white
           primary_info: name
@@ -307,8 +311,6 @@ cards:
                 }
                 ha-icon { position: relative; z-index: 2; mix-blend-mode: overlay; color: white !important; }
                 @keyframes liquid-wave { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        # --- VENTILÁTOR ---
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_pwmfan_fan_speed
           icon: mdi:fan
@@ -341,10 +343,10 @@ cards:
     card:
       type: vertical-stack
       cards:
-        # --- MEMÓRIA HASZNÁLAT ---
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_memoriahasznalat
-          tap_action: { action: more-info }
+          tap_action:
+            action: more-info
           icon: mdi:memory
           icon_color: white
           primary_info: name
@@ -384,11 +386,10 @@ cards:
                 }
                 ha-icon { position: relative; z-index: 2; mix-blend-mode: overlay; color: white !important; }
                 @keyframes liquid-wave { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        # --- TÁRHELY HASZNÁLAT ---
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_lemezhasznalat
-          tap_action: { action: more-info }
+          tap_action:
+            action: more-info
           icon: mdi:harddisk
           icon_color: white
           primary_info: name
@@ -430,7 +431,7 @@ cards:
                 @keyframes liquid-wave { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
   # ==========================================
-  # 3. FÜL TARTALMA (HÁLÓZAT & RENDSZER)
+  # 3. FÜL TARTALMA (HÁLÓZAT)
   # ==========================================
   - type: conditional
     conditions:
@@ -440,7 +441,6 @@ cards:
     card:
       type: vertical-stack
       cards:
-        # --- IP CÍM ---
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_ipv4_cim_eth0
           icon: mdi:ip-network
@@ -454,14 +454,12 @@ cards:
                 --card-primary-font-size: 15px !important; --card-secondary-font-size: 12px !important; --card-primary-font-weight: bold !important;
                 background: #1c1c1c !important; border: none !important; border-radius: 12px;
               }
-
-        # --- HÁLÓZATI FORGALOM (GRID) ---
         - type: grid
           columns: 2
           square: false
           cards:
             - type: custom:mushroom-entity-card
-              entity: sensor.system_monitor_bejovo_halozati_forgalom_eth0 
+              entity: sensor.system_monitor_bejovo_halozati_forgalom_eth0
               icon: mdi:arrow-down-bold-circle-outline
               icon_color: light-green
               name: Letöltés
@@ -475,9 +473,8 @@ cards:
                   }
                   mushroom-shape-icon { animation: pulse-down 2s infinite ease-in-out; }
                   @keyframes pulse-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
-            
             - type: custom:mushroom-entity-card
-              entity: sensor.system_monitor_kimeno_halozati_forgalom_eth0 
+              entity: sensor.system_monitor_kimeno_halozati_forgalom_eth0
               icon: mdi:arrow-up-bold-circle-outline
               icon_color: purple
               name: Feltöltés
@@ -491,10 +488,8 @@ cards:
                   }
                   mushroom-shape-icon { animation: pulse-up 2s infinite ease-in-out; }
                   @keyframes pulse-up { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-
-        # --- UPTIME ---
         - type: custom:mushroom-entity-card
-          entity: sensor.system_monitor_utolso_rendszerinditas 
+          entity: sensor.system_monitor_utolso_rendszerinditas
           icon: mdi:server-network
           icon_color: amber
           name: Utolsó rendszerindítás
@@ -510,7 +505,7 @@ cards:
               @keyframes glow-server { 0% { filter: drop-shadow(0 0 2px rgba(255, 193, 7, 0.2)); } 100% { filter: drop-shadow(0 0 12px rgba(255, 193, 7, 0.8)); } }
 
   # ==========================================
-  # 4. FÜL TARTALMA (ZIGBEE / SLZB)
+  # 4. FÜL TARTALMA (ZIGBEE)
   # ==========================================
   - type: conditional
     conditions:
@@ -520,91 +515,152 @@ cards:
     card:
       type: vertical-stack
       cards:
-        # --- HŐMÉRSÉKLETEK (GRID) ---
         - type: grid
           columns: 2
           square: false
           cards:
-            # Rendszermag (Core) Hőmérséklet
-            - type: custom:mushroom-entity-card
-              entity: sensor.slzb_mrw10_rendszermag_chip_homerseklet # <-- Kérlek ellenőrizd!
-              icon: mdi:thermometer
-              name: Core Temp
-              primary_info: state
-              secondary_info: name
+            # --- ZIGBEE 1. OSZLOP: CORE TEMP ---
+            - type: custom:vertical-stack-in-card
               card_mod:
-                style:
-                  .: |
-                    ha-card {
-                      --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                      background: #1c1c1c !important; border: none !important; border-radius: 12px;
-                    }
-                  mushroom-shape-icon$: |
-                    .shape {
-                      {% set temp = states(config.entity) | float(0) %}
-                      {% set rgb = '0,140,255' %} {% set anim = 'temp-cold-breathe' %} {% set glow_anim = 'temp-cold-glow' %} {% set halo_anim = 'temp-cold-halo' %} {% set duration = 4.0 %}
-                      {% if temp < 50 %} {% set rgb = '0,140,255' %} {% set duration = 4.4 %}
-                      {% elif temp < 65 %} {% set rgb = '255,210,40' %} {% set anim = 'temp-cool-wave' %} {% set glow_anim = 'temp-cool-glow' %} {% set halo_anim = 'temp-cool-halo' %} {% set duration = 3.4 %}
-                      {% elif temp < 80 %} {% set rgb = '255,150,40' %} {% set anim = 'temp-comfy-breathe' %} {% set glow_anim = 'temp-comfy-glow' %} {% set halo_anim = 'temp-comfy-halo' %} {% set duration = 2.4 %}
-                      {% else %} {% set rgb = '255,40,40' %} {% set anim = 'temp-hot-shimmer' %} {% set glow_anim = 'temp-hot-glow' %} {% set halo_anim = 'temp-hot-halo' %} {% set duration = 1.5 %}
-                      {% endif %}
-                      --temp-rgb: {{ rgb }}; --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite; --temp-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite; --temp-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
-                      --icon-color: rgba({{ rgb }}, 1); background-color: rgba(77,77,77,0.2) !important; box-shadow: none !important; border: 1px solid rgba(255,255,255,0.06); opacity: 1; position: relative; animation: var(--shape-animation);
-                    }
-                    .shape::before, .shape::after { content: ''; position: absolute; border-radius: inherit; pointer-events: none; }
-                    .shape::before { inset: -8px; animation: var(--temp-glow-animation); }
-                    .shape::after { inset: -22px; animation: var(--temp-halo-animation); mix-blend-mode: screen; }
-                    @keyframes temp-cool-wave { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(1px) translateY(-1px); } }
-                    @keyframes temp-cool-glow { 50% { box-shadow: 0 0 28px 2 rgba(var(--temp-rgb), 0.95), 0 0 48px 12px rgba(var(--temp-rgb), 0.85); } }
-                    @keyframes temp-cool-halo { 50% { box-shadow: 0 0 140px 42px rgba(var(--temp-rgb), 0.45), 0 30px 110px -10px rgba(0, 255, 255, 0.5); } }
-                    @keyframes temp-comfy-breathe { 0%, 100% { transform: scale(0.98); } 50% { transform: scale(1.05); } }
-                    @keyframes temp-comfy-glow { 50% { box-shadow: 0 0 30px 4 rgba(var(--temp-rgb), 0.95), 0 0 54px 14px rgba(var(--temp-rgb), 0.9); } }
-                    @keyframes temp-comfy-halo { 50% { box-shadow: 0 0 140px 48px rgba(var(--temp-rgb), 0.55), 0 26px 100px -10px rgba(255,210,150,0.5); } }
-            
-            # Zigbee Chip Hőmérséklet
-            - type: custom:mushroom-entity-card
-              entity: sensor.slzb_mrw10_zigbee_chip_homerseklet # <-- Kérlek ellenőrizd!
-              icon: mdi:thermometer
-              name: Zigbee Temp
-              primary_info: state
-              secondary_info: name
-              card_mod:
-                style:
-                  .: |
-                    ha-card {
-                      --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                      background: #1c1c1c !important; border: none !important; border-radius: 12px;
-                    }
-                  mushroom-shape-icon$: |
-                    .shape {
-                      {% set temp = states(config.entity) | float(0) %}
-                      {% set rgb = '0,140,255' %} {% set anim = 'temp-cold-breathe' %} {% set glow_anim = 'temp-cold-glow' %} {% set halo_anim = 'temp-cold-halo' %} {% set duration = 4.0 %}
-                      {% if temp < 50 %} {% set rgb = '0,140,255' %} {% set duration = 4.4 %}
-                      {% elif temp < 65 %} {% set rgb = '255,210,40' %} {% set anim = 'temp-cool-wave' %} {% set glow_anim = 'temp-cool-glow' %} {% set halo_anim = 'temp-cool-halo' %} {% set duration = 3.4 %}
-                      {% elif temp < 80 %} {% set rgb = '255,150,40' %} {% set anim = 'temp-comfy-breathe' %} {% set glow_anim = 'temp-comfy-glow' %} {% set halo_anim = 'temp-comfy-halo' %} {% set duration = 2.4 %}
-                      {% else %} {% set rgb = '255,40,40' %} {% set anim = 'temp-hot-shimmer' %} {% set glow_anim = 'temp-hot-glow' %} {% set halo_anim = 'temp-hot-halo' %} {% set duration = 1.5 %}
-                      {% endif %}
-                      --temp-rgb: {{ rgb }}; --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite; --temp-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite; --temp-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
-                      --icon-color: rgba({{ rgb }}, 1); background-color: rgba(77,77,77,0.2) !important; box-shadow: none !important; border: 1px solid rgba(255,255,255,0.06); opacity: 1; position: relative; animation: var(--shape-animation);
-                    }
-                    .shape::before, .shape::after { content: ''; position: absolute; border-radius: inherit; pointer-events: none; }
-                    .shape::before { inset: -8px; animation: var(--temp-glow-animation); }
-                    .shape::after { inset: -22px; animation: var(--temp-halo-animation); mix-blend-mode: screen; }
-                    @keyframes temp-cool-wave { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(1px) translateY(-1px); } }
-                    @keyframes temp-cool-glow { 50% { box-shadow: 0 0 28px 2 rgba(var(--temp-rgb), 0.95), 0 0 48px 12px rgba(var(--temp-rgb), 0.85); } }
-                    @keyframes temp-cool-halo { 50% { box-shadow: 0 0 140px 42px rgba(var(--temp-rgb), 0.45), 0 30px 110px -10px rgba(0, 255, 255, 0.5); } }
-                    @keyframes temp-comfy-breathe { 0%, 100% { transform: scale(0.98); } 50% { transform: scale(1.05); } }
-                    @keyframes temp-comfy-glow { 50% { box-shadow: 0 0 30px 4 rgba(var(--temp-rgb), 0.95), 0 0 54px 14px rgba(var(--temp-rgb), 0.9); } }
-                    @keyframes temp-comfy-halo { 50% { box-shadow: 0 0 140px 48px rgba(var(--temp-rgb), 0.55), 0 26px 100px -10px rgba(255,210,150,0.5); } }
+                style: |
+                  ha-card { background: #1c1c1c !important; border: none !important; border-radius: 12px; overflow: hidden; }
+              cards:
+                - type: custom:mushroom-entity-card
+                  entity: sensor.slzb_mrw10_rendszermag_chip_homerseklete
+                  icon: mdi:thermometer
+                  name: Core Temp
+                  primary_info: state
+                  secondary_info: name
+                  card_mod:
+                    style:
+                      .: |
+                        ha-card {
+                          --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
+                          background: none !important; box-shadow: none !important; border: none !important;
+                        }
+                      mushroom-shape-icon$: |
+                        .shape {
+                          {% set temp = states(config.entity) | float(0) %}
+                          {% set rgb = '0,140,255' %} {% set anim = 'temp-cold-breathe' %} {% set glow_anim = 'temp-cold-glow' %} {% set halo_anim = 'temp-cold-halo' %} {% set duration = 4.0 %}
+                          {% if temp < 50 %} {% set rgb = '0,140,255' %} {% set duration = 4.4 %}
+                          {% elif temp < 65 %} {% set rgb = '255,210,40' %} {% set anim = 'temp-cool-wave' %} {% set glow_anim = 'temp-cool-glow' %} {% set halo_anim = 'temp-cool-halo' %} {% set duration = 3.4 %}
+                          {% elif temp < 80 %} {% set rgb = '255,150,40' %} {% set anim = 'temp-comfy-breathe' %} {% set glow_anim = 'temp-comfy-glow' %} {% set halo_anim = 'temp-comfy-halo' %} {% set duration = 2.4 %}
+                          {% else %} {% set rgb = '255,40,40' %} {% set anim = 'temp-hot-shimmer' %} {% set glow_anim = 'temp-hot-glow' %} {% set halo_anim = 'temp-hot-halo' %} {% set duration = 1.5 %}
+                          {% endif %}
+                          --temp-rgb: {{ rgb }}; --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite; --temp-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite; --temp-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
+                          --icon-color: rgba({{ rgb }}, 1); background-color: rgba(77,77,77,0.2) !important; box-shadow: none !important; border: 1px solid rgba(255,255,255,0.06); opacity: 1; position: relative; animation: var(--shape-animation);
+                        }
+                        .shape::before, .shape::after { content: ''; position: absolute; border-radius: inherit; pointer-events: none; }
+                        .shape::before { inset: -8px; animation: var(--temp-glow-animation); }
+                        .shape::after { inset: -22px; animation: var(--temp-halo-animation); mix-blend-mode: screen; }
+                        @keyframes temp-cool-wave { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(1px) translateY(-1px); } }
+                        @keyframes temp-cool-glow { 50% { box-shadow: 0 0 28px 2 rgba(var(--temp-rgb), 0.95), 0 0 48px 12px rgba(var(--temp-rgb), 0.85); } }
+                        @keyframes temp-cool-halo { 50% { box-shadow: 0 0 140px 42px rgba(var(--temp-rgb), 0.45), 0 30px 110px -10px rgba(0, 255, 255, 0.5); } }
+                        @keyframes temp-comfy-breathe { 0%, 100% { transform: scale(0.98); } 50% { transform: scale(1.05); } }
+                        @keyframes temp-comfy-glow { 50% { box-shadow: 0 0 30px 4 rgba(var(--temp-rgb), 0.95), 0 0 54px 14px rgba(var(--temp-rgb), 0.9); } }
+                        @keyframes temp-comfy-halo { 50% { box-shadow: 0 0 140px 48px rgba(var(--temp-rgb), 0.55), 0 26px 100px -10px rgba(255,210,150,0.5); } }
+                        @keyframes temp-hot-shimmer { 0%, 100% { transform: scale(1); filter: blur(0); } 50% { transform: scale(1.08); filter: blur(0.6px); } }
+                        @keyframes temp-hot-glow { 50% { box-shadow: 0 0 34px 6 rgba(var(--temp-rgb), 1), 0 0 62px 14px rgba(var(--temp-rgb), 0.95); } }
+                        @keyframes temp-hot-halo { 50% { box-shadow: 0 0 160px 60px rgba(var(--temp-rgb), 0.6), 0 34px 120px -12px rgba(255,150,100,0.6); } }
+                - type: custom:mini-graph-card
+                  entities:
+                    - sensor.slzb_mrw10_rendszermag_chip_homerseklete
+                  hours_to_show: 24
+                  line_width: 4
+                  show:
+                    name: false
+                    icon: false
+                    state: false
+                    labels: false
+                    legend: false
+                  color_thresholds:
+                    - value: 30
+                      color: blue
+                    - value: 50
+                      color: orange
+                    - value: 75
+                      color: red
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important; box-shadow: none !important; border: none !important;
+                        opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important;
+                      }
 
-        # --- HÁLÓZAT ÉS UPTIME (GRID) ---
+            # --- ZIGBEE 2. OSZLOP: ZIGBEE TEMP ---
+            - type: custom:vertical-stack-in-card
+              card_mod:
+                style: |
+                  ha-card { background: #1c1c1c !important; border: none !important; border-radius: 12px; overflow: hidden; }
+              cards:
+                - type: custom:mushroom-entity-card
+                  entity: sensor.slzb_mrw10_zigbee_chip_homerseklet
+                  icon: mdi:thermometer
+                  name: Zigbee Temp
+                  primary_info: state
+                  secondary_info: name
+                  card_mod:
+                    style:
+                      .: |
+                        ha-card {
+                          --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
+                          background: none !important; box-shadow: none !important; border: none !important;
+                        }
+                      mushroom-shape-icon$: |
+                        .shape {
+                          {% set temp = states(config.entity) | float(0) %}
+                          {% set rgb = '0,140,255' %} {% set anim = 'temp-cold-breathe' %} {% set glow_anim = 'temp-cold-glow' %} {% set halo_anim = 'temp-cold-halo' %} {% set duration = 4.0 %}
+                          {% if temp < 50 %} {% set rgb = '0,140,255' %} {% set duration = 4.4 %}
+                          {% elif temp < 65 %} {% set rgb = '255,210,40' %} {% set anim = 'temp-cool-wave' %} {% set glow_anim = 'temp-cool-glow' %} {% set halo_anim = 'temp-cool-halo' %} {% set duration = 3.4 %}
+                          {% elif temp < 80 %} {% set rgb = '255,150,40' %} {% set anim = 'temp-comfy-breathe' %} {% set glow_anim = 'temp-comfy-glow' %} {% set halo_anim = 'temp-comfy-halo' %} {% set duration = 2.4 %}
+                          {% else %} {% set rgb = '255,40,40' %} {% set anim = 'temp-hot-shimmer' %} {% set glow_anim = 'temp-hot-glow' %} {% set halo_anim = 'temp-hot-halo' %} {% set duration = 1.5 %}
+                          {% endif %}
+                          --temp-rgb: {{ rgb }}; --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite; --temp-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite; --temp-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
+                          --icon-color: rgba({{ rgb }}, 1); background-color: rgba(77,77,77,0.2) !important; box-shadow: none !important; border: 1px solid rgba(255,255,255,0.06); opacity: 1; position: relative; animation: var(--shape-animation);
+                        }
+                        .shape::before, .shape::after { content: ''; position: absolute; border-radius: inherit; pointer-events: none; }
+                        .shape::before { inset: -8px; animation: var(--temp-glow-animation); }
+                        .shape::after { inset: -22px; animation: var(--temp-halo-animation); mix-blend-mode: screen; }
+                        @keyframes temp-cool-wave { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(1px) translateY(-1px); } }
+                        @keyframes temp-cool-glow { 50% { box-shadow: 0 0 28px 2 rgba(var(--temp-rgb), 0.95), 0 0 48px 12px rgba(var(--temp-rgb), 0.85); } }
+                        @keyframes temp-cool-halo { 50% { box-shadow: 0 0 140px 42px rgba(var(--temp-rgb), 0.45), 0 30px 110px -10px rgba(0, 255, 255, 0.5); } }
+                        @keyframes temp-comfy-breathe { 0%, 100% { transform: scale(0.98); } 50% { transform: scale(1.05); } }
+                        @keyframes temp-comfy-glow { 50% { box-shadow: 0 0 30px 4 rgba(var(--temp-rgb), 0.95), 0 0 54px 14px rgba(var(--temp-rgb), 0.9); } }
+                        @keyframes temp-comfy-halo { 50% { box-shadow: 0 0 140px 48px rgba(var(--temp-rgb), 0.55), 0 26px 100px -10px rgba(255,210,150,0.5); } }
+                        @keyframes temp-hot-shimmer { 0%, 100% { transform: scale(1); filter: blur(0); } 50% { transform: scale(1.08); filter: blur(0.6px); } }
+                        @keyframes temp-hot-glow { 50% { box-shadow: 0 0 34px 6 rgba(var(--temp-rgb), 1), 0 0 62px 14px rgba(var(--temp-rgb), 0.95); } }
+                        @keyframes temp-hot-halo { 50% { box-shadow: 0 0 160px 60px rgba(var(--temp-rgb), 0.6), 0 34px 120px -12px rgba(255,150,100,0.6); } }
+                - type: custom:mini-graph-card
+                  entities:
+                    - sensor.slzb_mrw10_zigbee_chip_homerseklet
+                  hours_to_show: 24
+                  line_width: 4
+                  show:
+                    name: false
+                    icon: false
+                    state: false
+                    labels: false
+                    legend: false
+                  color_thresholds:
+                    - value: 30
+                      color: blue
+                    - value: 50
+                      color: orange
+                    - value: 75
+                      color: red
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important; box-shadow: none !important; border: none !important;
+                        opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important;
+                      }
+
         - type: grid
           columns: 2
           square: false
           cards:
-            # Ethernet Kapcsolat
             - type: custom:mushroom-entity-card
-              entity: sensor.slzb_mrw10_ethernet # <-- Kérlek ellenőrizd!
+              entity: binary_sensor.slzb_mrw10_ethernet
               icon: mdi:ethernet-cable
               icon_color: info
               name: Ethernet
@@ -623,10 +679,8 @@ cards:
                     0%, 100% { filter: drop-shadow(0 0 2px rgba(3, 169, 244, 0.3)); transform: scale(1); }
                     50% { filter: drop-shadow(0 0 8px rgba(3, 169, 244, 0.8)); transform: scale(1.05); }
                   }
-
-            # Zigbee / Core Uptime
             - type: custom:mushroom-entity-card
-              entity: sensor.slzb_mrw10_rendszermag_uzemido # <-- Kérlek ellenőrizd!
+              entity: sensor.slzb_mrw10_rendszermag_uzemido
               icon: mdi:clock-outline
               icon_color: amber
               name: Rendszeridő
