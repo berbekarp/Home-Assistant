@@ -2,11 +2,12 @@
 
 Ez a dokumentáció a Home Assistant szervert (Raspberry Pi / Mini PC) felügyelő, interaktív és animált dashboard kódját tartalmazza. A panel a fő dashboardról egy navigációs gombbal nyitható meg, és helytakarékos, "füles" (Tab) elrendezést használ.
 
-A rendszer 4 fülre van bontva a logikus átláthatóság érdekében:
-1. **Processzor:** CPU terhelés (folyadékszimuláció), Hőmérséklet (színváltós glória és grafikon), Ventilátor sebesség (forgó animáció).
+A rendszer 5 fülre van bontva a logikus átláthatóság érdekében:
+1. **Processzor (CPU):** CPU terhelés (folyadékszimuláció), Hőmérséklet (színváltós glória és grafikon), Ventilátor sebesség (forgó animáció).
 2. **Tárhely & RAM:** Memória és SSD kihasználtság egyedi, terhelésfüggő "folyadékszint" animációkkal.
-3. **Hálózat:** IP címek, hálózati forgalom (lüktető nyilakkal), és utolsó rendszerindítás (izzó szerver ikonnal).
+3. **Hálózat (Net):** IP címek, hálózati forgalom (lüktető nyilakkal), és utolsó rendszerindítás (izzó szerver ikonnal).
 4. **Zigbee (SLZB):** Külön panel a Zigbee koordinátor chipjeinek (Core és Zigbee) hőmérsékletével és az Ethernet kapcsolat állapotával.
+5. **Akkumulátor (UPS):** Dedikált fül a szünetmentes tápegység (pl. X1200) töltöttségi szintjének megjelenítésére, dinamikus folyadékszimulációval.
 
 ---
 
@@ -30,13 +31,13 @@ A rendszer 4 fülre van bontva a logikus átláthatóság érdekében:
 ### 2. Segédentitás (Helper) a váltáshoz
 A fülek közötti léptetéshez hozz létre egy Szám (Number) segédentitást:
 * **Név:** `tabs_system` (Azonosító: `input_number.tabs_system`)
-* **Minimum:** 1 | **Maximum:** 4 | **Lépésköz:** 1
+* **Minimum:** 1 | **Maximum:** 5 | **Lépésköz:** 1
 
 ---
 
 ## 💻 A Teljes Dashboard Kódja
 
-Hozz létre egy új, üres kártyát (Kézi / Manual) a rendszerfelügyeleti nézeteden, és másold be az alábbi, egybeszerkesztett kódot. *(Figyelem: az entitás neveket szükség esetén cseréld le a saját szervered szenzorainak nevére!)*
+Hozz létre egy új, üres kártyát (Kézi / Manual) a rendszerfelügyeleti nézeteden, és másold be az alábbi, egybeszerkesztett kódot. *(Figyelem: az entitás neveket, különösen az 5. fülön lévő X1200 akku szenzort, szükség esetén cseréld le a saját szervered pontos szenzorneveire!)*
 
 ```yaml
 type: custom:vertical-stack-in-card
@@ -47,7 +48,7 @@ cards:
   - type: custom:mushroom-template-card
     primary: Rendszerfelügyelet
     icon: mdi:raspberry-pi
-    color: "#E30B5C"
+    color: '#E30B5C'
     features_position: bottom
     grid_options:
       columns: 12
@@ -78,7 +79,7 @@ cards:
       # 1. GOMB: PROCESSZOR
       - type: template
         icon: mdi:cpu-64-bit
-        content: Processzor
+        content: CPU
         tap_action:
           action: perform-action
           perform_action: input_number.set_value
@@ -89,13 +90,13 @@ cards:
         card_mod:
           style: |
             ha-card {
-              min-width: 120px !important; max-width: 120px !important;
+              min-width: 80px !important; max-width: 80px !important;
               background-color: {{ '#E30B5C' if is_state('input_number.tabs_system', '1.0') else '#2C3E50' }} !important;
               position: relative !important;
             }
             .content { justify-content: center !important; }
             ha-state-icon {
-              position: absolute !important; left: 12px !important; color: {{ '#FFFFFF' }} !important;
+              position: absolute !important; left: 10px !important; color: {{ '#FFFFFF' }} !important;
               animation: {{ 'pulse 2s infinite ease-in-out' if is_state('input_number.tabs_system', '1.0') else 'none' }} !important;
             }
             span {
@@ -104,10 +105,10 @@ cards:
             }
             @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
       
-      # 2. GOMB: MEMÓRIA & LEMEZ
+      # 2. GOMB: TÁRHELY & RAM
       - type: template
-        icon: mdi:harddisk
-        content: Tárhely & RAM
+        icon: mdi:memory
+        content: RAM
         tap_action:
           action: perform-action
           perform_action: input_number.set_value
@@ -118,13 +119,13 @@ cards:
         card_mod:
           style: |
             ha-card {
-              min-width: 130px !important; max-width: 130px !important;
+              min-width: 80px !important; max-width: 80px !important;
               background-color: {{ '#E30B5C' if is_state('input_number.tabs_system', '2.0') else '#2C3E50' }} !important;
               position: relative !important;
             }
             .content { justify-content: center !important; }
             ha-state-icon {
-              position: absolute !important; left: 8px !important; color: {{ '#FFFFFF' }} !important;
+              position: absolute !important; left: 10px !important; color: {{ '#FFFFFF' }} !important;
               animation: {{ 'pulse 2s infinite ease-in-out' if is_state('input_number.tabs_system', '2.0') else 'none' }} !important;
             }
             span {
@@ -135,7 +136,7 @@ cards:
       # 3. GOMB: HÁLÓZAT
       - type: template
         icon: mdi:network
-        content: Hálózat
+        content: Net
         tap_action:
           action: perform-action
           perform_action: input_number.set_value
@@ -146,7 +147,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              min-width: 100px !important; max-width: 100px !important;
+              min-width: 80px !important; max-width: 80px !important;
               background-color: {{ '#E30B5C' if is_state('input_number.tabs_system', '3.0') else '#2C3E50' }} !important;
               position: relative !important;
             }
@@ -188,6 +189,34 @@ cards:
               padding-left: 15px !important;
             }
 
+      # 5. GOMB: AKKUMULÁTOR (UPS)
+      - type: template
+        icon: mdi:battery-charging
+        content: Akku
+        tap_action:
+          action: perform-action
+          perform_action: input_number.set_value
+          target:
+            entity_id: input_number.tabs_system
+          data:
+            value: 5
+        card_mod:
+          style: |
+            ha-card {
+              min-width: 90px !important; max-width: 90px !important;
+              background-color: {{ '#E30B5C' if is_state('input_number.tabs_system', '5.0') else '#2C3E50' }} !important;
+              position: relative !important;
+            }
+            .content { justify-content: center !important; }
+            ha-state-icon {
+              position: absolute !important; left: 10px !important; color: {{ '#FFFFFF' }} !important;
+              animation: {{ 'pulse 2s infinite ease-in-out' if is_state('input_number.tabs_system', '5.0') else 'none' }} !important;
+            }
+            span {
+              color: {{ '#FFFFFF' }} !important; font-weight: {{ 'bold' if is_state('input_number.tabs_system', '5.0') else '500' }} !important;
+              padding-left: 15px !important;
+            }
+
   # ==========================================
   # 1. FÜL TARTALMA (PROCESSZOR & VENTILÁTOR)
   # ==========================================
@@ -206,8 +235,7 @@ cards:
           cards:
             - type: custom:mushroom-entity-card
               entity: sensor.system_monitor_processzor_homerseklet
-              tap_action:
-                action: more-info
+              tap_action: { action: more-info }
               icon: mdi:thermometer
               name: CPU Hőmérséklet
               primary_info: state
@@ -249,12 +277,7 @@ cards:
                 - sensor.system_monitor_processzor_homerseklet
               hours_to_show: 24
               line_width: 4
-              show:
-                name: false
-                icon: false
-                state: false
-                labels: false
-                legend: false
+              show: { name: false, icon: false, state: false, labels: false, legend: false }
               color_thresholds:
                 - value: 30
                   color: blue
@@ -264,14 +287,10 @@ cards:
                   color: red
               card_mod:
                 style: |
-                  ha-card {
-                    background: none !important; box-shadow: none !important; border: none !important;
-                    opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important;
-                  }
+                  ha-card { background: none !important; box-shadow: none !important; border: none !important; opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important; }
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_processzor_hasznalat
-          tap_action:
-            action: more-info
+          tap_action: { action: more-info }
           icon: mdi:cpu-64-bit
           icon_color: white
           primary_info: name
@@ -292,23 +311,11 @@ cards:
                   background-image: radial-gradient(circle at 24px 24px, rgba({{ color }}, 0.15) 0%, transparent 60%) !important;
                 }
                 mushroom-shape-icon { --icon-size: 55px; }
-                ha-card::before {
-                  content: '{{ states(config.entity) | replace(",", ".") | float(0) | round(1) }}%'; position: absolute; top: 12px; right: 12px; font-size: 1rem; font-weight: 700;
-                  color: var(--text-color); background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px;
-                }
-                ha-card::after {
-                  content: ''; position: absolute; bottom: 0; left: 0; height: 4px; width: var(--custom-level);
-                  background: linear-gradient(90deg, transparent, var(--custom-color)); box-shadow: 0 0 10px var(--custom-color);
-                }
+                ha-card::before { content: '{{ states(config.entity) | replace(",", ".") | float(0) | round(1) }}%'; position: absolute; top: 12px; right: 12px; font-size: 1rem; font-weight: 700; color: var(--text-color); background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; }
+                ha-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 4px; width: var(--custom-level); background: linear-gradient(90deg, transparent, var(--custom-color)); box-shadow: 0 0 10px var(--custom-color); }
               mushroom-shape-icon$: |
-                .shape {
-                  --liquid-level: var(--custom-level); --liquid-color: var(--custom-color);
-                  background: rgba(255, 255, 255, 0.05) !important; overflow: hidden !important; position: relative; border: 1px solid rgba(255,255,255,0.1);
-                }
-                .shape::before {
-                  content: ''; position: absolute; left: -50%; width: 200%; height: 200%;
-                  top: calc(100% - var(--liquid-level)); background: var(--liquid-color); border-radius: 40%; animation: liquid-wave 4s linear infinite; opacity: 0.8;
-                }
+                .shape { --liquid-level: var(--custom-level); --liquid-color: var(--custom-color); background: rgba(255, 255, 255, 0.05) !important; overflow: hidden !important; position: relative; border: 1px solid rgba(255,255,255,0.1); }
+                .shape::before { content: ''; position: absolute; left: -50%; width: 200%; height: 200%; top: calc(100% - var(--liquid-level)); background: var(--liquid-color); border-radius: 40%; animation: liquid-wave 4s linear infinite; opacity: 0.8; }
                 ha-icon { position: relative; z-index: 2; mix-blend-mode: overlay; color: white !important; }
                 @keyframes liquid-wave { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         - type: custom:mushroom-entity-card
@@ -327,10 +334,7 @@ cards:
                   animation: fan-spin {{ speed }}s linear infinite;
                 {% endif %}
               }
-              @keyframes fan-spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-              }
+              @keyframes fan-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
   # ==========================================
   # 2. FÜL TARTALMA (MEMÓRIA ÉS TÁRHELY)
@@ -345,8 +349,7 @@ cards:
       cards:
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_memoriahasznalat
-          tap_action:
-            action: more-info
+          tap_action: { action: more-info }
           icon: mdi:memory
           icon_color: white
           primary_info: name
@@ -367,29 +370,16 @@ cards:
                   background-image: radial-gradient(circle at 24px 24px, rgba({{ color }}, 0.15) 0%, transparent 60%) !important;
                 }
                 mushroom-shape-icon { --icon-size: 55px; }
-                ha-card::before {
-                  content: '{{ states(config.entity) | replace(",", ".") | float(0) | round(1) }}%'; position: absolute; top: 12px; right: 12px; font-size: 1rem; font-weight: 700;
-                  color: var(--text-color); background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px;
-                }
-                ha-card::after {
-                  content: ''; position: absolute; bottom: 0; left: 0; height: 4px; width: var(--custom-level);
-                  background: linear-gradient(90deg, transparent, var(--custom-color)); box-shadow: 0 0 10px var(--custom-color); transition: width 0.5s ease;
-                }
+                ha-card::before { content: '{{ states(config.entity) | replace(",", ".") | float(0) | round(1) }}%'; position: absolute; top: 12px; right: 12px; font-size: 1rem; font-weight: 700; color: var(--text-color); background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; }
+                ha-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 4px; width: var(--custom-level); background: linear-gradient(90deg, transparent, var(--custom-color)); box-shadow: 0 0 10px var(--custom-color); transition: width 0.5s ease; }
               mushroom-shape-icon$: |
-                .shape {
-                  --liquid-level: var(--custom-level); --liquid-color: var(--custom-color);
-                  background: rgba(255, 255, 255, 0.05) !important; overflow: hidden !important; position: relative; border: 1px solid rgba(255,255,255,0.1);
-                }
-                .shape::before {
-                  content: ''; position: absolute; left: -50%; width: 200%; height: 200%;
-                  top: calc(100% - var(--liquid-level)); background: var(--liquid-color); border-radius: 40%; animation: liquid-wave 5s linear infinite; opacity: 0.8;
-                }
+                .shape { --liquid-level: var(--custom-level); --liquid-color: var(--custom-color); background: rgba(255, 255, 255, 0.05) !important; overflow: hidden !important; position: relative; border: 1px solid rgba(255,255,255,0.1); }
+                .shape::before { content: ''; position: absolute; left: -50%; width: 200%; height: 200%; top: calc(100% - var(--liquid-level)); background: var(--liquid-color); border-radius: 40%; animation: liquid-wave 5s linear infinite; opacity: 0.8; }
                 ha-icon { position: relative; z-index: 2; mix-blend-mode: overlay; color: white !important; }
                 @keyframes liquid-wave { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         - type: custom:mushroom-entity-card
           entity: sensor.system_monitor_lemezhasznalat
-          tap_action:
-            action: more-info
+          tap_action: { action: more-info }
           icon: mdi:harddisk
           icon_color: white
           primary_info: name
@@ -410,23 +400,11 @@ cards:
                   background-image: radial-gradient(circle at 24px 24px, rgba({{ color }}, 0.15) 0%, transparent 60%) !important;
                 }
                 mushroom-shape-icon { --icon-size: 55px; }
-                ha-card::before {
-                  content: '{{ states(config.entity) | replace(",", ".") | float(0) | round(1) }}%'; position: absolute; top: 12px; right: 12px; font-size: 1rem; font-weight: 700;
-                  color: var(--text-color); background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px;
-                }
-                ha-card::after {
-                  content: ''; position: absolute; bottom: 0; left: 0; height: 4px; width: var(--custom-level);
-                  background: linear-gradient(90deg, transparent, var(--custom-color)); box-shadow: 0 0 10px var(--custom-color); transition: width 0.5s ease;
-                }
+                ha-card::before { content: '{{ states(config.entity) | replace(",", ".") | float(0) | round(1) }}%'; position: absolute; top: 12px; right: 12px; font-size: 1rem; font-weight: 700; color: var(--text-color); background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; }
+                ha-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 4px; width: var(--custom-level); background: linear-gradient(90deg, transparent, var(--custom-color)); box-shadow: 0 0 10px var(--custom-color); transition: width 0.5s ease; }
               mushroom-shape-icon$: |
-                .shape {
-                  --liquid-level: var(--custom-level); --liquid-color: var(--custom-color);
-                  background: rgba(255, 255, 255, 0.05) !important; overflow: hidden !important; position: relative; border: 1px solid rgba(255,255,255,0.1);
-                }
-                .shape::before {
-                  content: ''; position: absolute; left: -50%; width: 200%; height: 200%;
-                  top: calc(100% - var(--liquid-level)); background: var(--liquid-color); border-radius: 40%; animation: liquid-wave 6s linear infinite; opacity: 0.8;
-                }
+                .shape { --liquid-level: var(--custom-level); --liquid-color: var(--custom-color); background: rgba(255, 255, 255, 0.05) !important; overflow: hidden !important; position: relative; border: 1px solid rgba(255,255,255,0.1); }
+                .shape::before { content: ''; position: absolute; left: -50%; width: 200%; height: 200%; top: calc(100% - var(--liquid-level)); background: var(--liquid-color); border-radius: 40%; animation: liquid-wave 6s linear infinite; opacity: 0.8; }
                 ha-icon { position: relative; z-index: 2; mix-blend-mode: overlay; color: white !important; }
                 @keyframes liquid-wave { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
@@ -450,10 +428,7 @@ cards:
           secondary_info: name
           card_mod:
             style: |
-              ha-card {
-                --card-primary-font-size: 15px !important; --card-secondary-font-size: 12px !important; --card-primary-font-weight: bold !important;
-                background: #1c1c1c !important; border: none !important; border-radius: 12px;
-              }
+              ha-card { --card-primary-font-size: 15px !important; --card-secondary-font-size: 12px !important; --card-primary-font-weight: bold !important; background: #1c1c1c !important; border: none !important; border-radius: 12px; }
         - type: grid
           columns: 2
           square: false
@@ -467,10 +442,7 @@ cards:
               secondary_info: name
               card_mod:
                 style: |
-                  ha-card {
-                    --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                    background: #1c1c1c !important; border: none !important; border-radius: 12px;
-                  }
+                  ha-card { --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important; background: #1c1c1c !important; border: none !important; border-radius: 12px; }
                   mushroom-shape-icon { animation: pulse-down 2s infinite ease-in-out; }
                   @keyframes pulse-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
             - type: custom:mushroom-entity-card
@@ -482,10 +454,7 @@ cards:
               secondary_info: name
               card_mod:
                 style: |
-                  ha-card {
-                    --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                    background: #1c1c1c !important; border: none !important; border-radius: 12px;
-                  }
+                  ha-card { --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important; background: #1c1c1c !important; border: none !important; border-radius: 12px; }
                   mushroom-shape-icon { animation: pulse-up 2s infinite ease-in-out; }
                   @keyframes pulse-up { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
         - type: custom:mushroom-entity-card
@@ -497,10 +466,7 @@ cards:
           secondary_info: name
           card_mod:
             style: |
-              ha-card {
-                --card-primary-font-size: 15px !important; --card-secondary-font-size: 12px !important; --card-primary-font-weight: bold !important;
-                background: #1c1c1c !important; border: none !important; border-radius: 12px;
-              }
+              ha-card { --card-primary-font-size: 15px !important; --card-secondary-font-size: 12px !important; --card-primary-font-weight: bold !important; background: #1c1c1c !important; border: none !important; border-radius: 12px; }
               mushroom-shape-icon { animation: glow-server 3s infinite alternate; }
               @keyframes glow-server { 0% { filter: drop-shadow(0 0 2px rgba(255, 193, 7, 0.2)); } 100% { filter: drop-shadow(0 0 12px rgba(255, 193, 7, 0.8)); } }
 
@@ -519,7 +485,6 @@ cards:
           columns: 2
           square: false
           cards:
-            # --- ZIGBEE 1. OSZLOP: CORE TEMP ---
             - type: custom:vertical-stack-in-card
               card_mod:
                 style: |
@@ -534,10 +499,7 @@ cards:
                   card_mod:
                     style:
                       .: |
-                        ha-card {
-                          --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                          background: none !important; box-shadow: none !important; border: none !important;
-                        }
+                        ha-card { --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important; background: none !important; box-shadow: none !important; border: none !important; }
                       mushroom-shape-icon$: |
                         .shape {
                           {% set temp = states(config.entity) | float(0) %}
@@ -567,12 +529,7 @@ cards:
                     - sensor.slzb_mrw10_rendszermag_chip_homerseklete
                   hours_to_show: 24
                   line_width: 4
-                  show:
-                    name: false
-                    icon: false
-                    state: false
-                    labels: false
-                    legend: false
+                  show: { name: false, icon: false, state: false, labels: false, legend: false }
                   color_thresholds:
                     - value: 30
                       color: blue
@@ -582,12 +539,8 @@ cards:
                       color: red
                   card_mod:
                     style: |
-                      ha-card {
-                        background: none !important; box-shadow: none !important; border: none !important;
-                        opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important;
-                      }
+                      ha-card { background: none !important; box-shadow: none !important; border: none !important; opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important; }
 
-            # --- ZIGBEE 2. OSZLOP: ZIGBEE TEMP ---
             - type: custom:vertical-stack-in-card
               card_mod:
                 style: |
@@ -602,10 +555,7 @@ cards:
                   card_mod:
                     style:
                       .: |
-                        ha-card {
-                          --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                          background: none !important; box-shadow: none !important; border: none !important;
-                        }
+                        ha-card { --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important; background: none !important; box-shadow: none !important; border: none !important; }
                       mushroom-shape-icon$: |
                         .shape {
                           {% set temp = states(config.entity) | float(0) %}
@@ -635,12 +585,7 @@ cards:
                     - sensor.slzb_mrw10_zigbee_chip_homerseklet
                   hours_to_show: 24
                   line_width: 4
-                  show:
-                    name: false
-                    icon: false
-                    state: false
-                    labels: false
-                    legend: false
+                  show: { name: false, icon: false, state: false, labels: false, legend: false }
                   color_thresholds:
                     - value: 30
                       color: blue
@@ -650,10 +595,7 @@ cards:
                       color: red
                   card_mod:
                     style: |
-                      ha-card {
-                        background: none !important; box-shadow: none !important; border: none !important;
-                        opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important;
-                      }
+                      ha-card { background: none !important; box-shadow: none !important; border: none !important; opacity: 0.6; margin-top: -30px !important; padding-bottom: 0px !important; }
 
         - type: grid
           columns: 2
@@ -668,17 +610,9 @@ cards:
               secondary_info: name
               card_mod:
                 style: |
-                  ha-card {
-                    --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                    background: #1c1c1c !important; border: none !important; border-radius: 12px;
-                  }
-                  mushroom-shape-icon {
-                    animation: pulse-conn 2s infinite ease-in-out;
-                  }
-                  @keyframes pulse-conn {
-                    0%, 100% { filter: drop-shadow(0 0 2px rgba(3, 169, 244, 0.3)); transform: scale(1); }
-                    50% { filter: drop-shadow(0 0 8px rgba(3, 169, 244, 0.8)); transform: scale(1.05); }
-                  }
+                  ha-card { --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important; background: #1c1c1c !important; border: none !important; border-radius: 12px; }
+                  mushroom-shape-icon { animation: pulse-conn 2s infinite ease-in-out; }
+                  @keyframes pulse-conn { 0%, 100% { filter: drop-shadow(0 0 2px rgba(3, 169, 244, 0.3)); transform: scale(1); } 50% { filter: drop-shadow(0 0 8px rgba(3, 169, 244, 0.8)); transform: scale(1.05); } }
             - type: custom:mushroom-entity-card
               entity: sensor.slzb_mrw10_rendszermag_uzemido
               icon: mdi:clock-outline
@@ -688,9 +622,55 @@ cards:
               secondary_info: name
               card_mod:
                 style: |
-                  ha-card {
-                    --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important;
-                    background: #1c1c1c !important; border: none !important; border-radius: 12px;
-                  }
+                  ha-card { --card-primary-font-size: 14px !important; --card-secondary-font-size: 11px !important; --card-primary-font-weight: bold !important; background: #1c1c1c !important; border: none !important; border-radius: 12px; }
 
-```
+  # ==========================================
+  # 5. FÜL TARTALMA (X1200 UPS AKKUMULÁTOR)
+  # ==========================================
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: input_number.tabs_system
+        state: "5.0"
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: sensor.x1200_battery_level # <-- CSERÉLD KI A PONTOS X1200 SZENZOROD NEVÉRE!
+          tap_action: { action: more-info }
+          icon: mdi:battery-high
+          icon_color: white
+          primary_info: name
+          secondary_info: state
+          name: UPS Töltöttség
+          card_mod:
+            style:
+              .: |
+                ha-card {
+                  --card-primary-font-size: 15px !important; --card-secondary-font-size: 12px !important; --card-primary-font-weight: bold !important;
+                  {% set level = states(config.entity) | replace('%', '') | float(0) %}
+                  
+                  {# Ide írhatod be a töltésjelző entitásodat, ha van, hogy buborékoljon (pl: is_state('binary_sensor.x1200_charging', 'on') ) #}
+                  {% set is_charging = false %} 
+                  
+                  {% if is_charging %} {% set color = '0, 255, 255' %}
+                  {% elif level <= 20 %} {% set color = '244, 67, 54' %}
+                  {% elif level <= 60 %} {% set color = '255, 152, 0' %}
+                  {% else %} {% set color = '0, 255, 100' %} {% endif %}
+
+                  --custom-level: {{ level }}%; --custom-color: rgba({{ color }}, 0.8);
+                  --custom-bubble: {{ 'block' if is_charging else 'none' }};
+                  --text-color: {{ 'rgba(' ~ color ~ ', 1)' if level < 101 else 'rgba(255,255,255,0.7)' }};
+                  background: #1c1c1c !important; border: none !important; border-radius: 12px; position: relative; overflow: hidden;
+                  background-image: radial-gradient(circle at 24px 24px, rgba({{ color }}, 0.15) 0%, transparent 60%) !important;
+                }
+                mushroom-shape-icon { --icon-size: 55px; }
+                ha-card::before { content: '{{ states(config.entity) | float(0) | round(0) }}%'; position: absolute; top: 12px; right: 12px; font-size: 1rem; font-weight: 700; color: var(--text-color); background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; }
+                ha-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 4px; width: var(--custom-level); background: linear-gradient(90deg, transparent, var(--custom-color)); box-shadow: 0 0 10px var(--custom-color); transition: width 0.5s ease; }
+              mushroom-shape-icon$: |
+                .shape { --liquid-level: var(--custom-level); --liquid-color: var(--custom-color); background: rgba(255, 255, 255, 0.05) !important; overflow: hidden !important; position: relative; border: 1px solid rgba(255,255,255,0.1); }
+                .shape::before { content: ''; position: absolute; left: -50%; width: 200%; height: 200%; top: calc(100% - var(--liquid-level)); background: var(--liquid-color); border-radius: 40%; animation: liquid-wave 5s linear infinite; opacity: 0.8; }
+                .shape::after { content: ''; display: var(--custom-bubble); position: absolute; inset: 0; background-image: radial-gradient(2px 2px at 20% 80%, rgba(255,255,255,0.8), transparent), radial-gradient(2px 2px at 50% 70%, rgba(255,255,255,0.8), transparent), radial-gradient(3px 3px at 80% 90%, rgba(255,255,255,0.8), transparent); background-size: 100% 100%; animation: bubbles-rise 0.7s linear infinite; }
+                ha-icon { position: relative; z-index: 2; mix-blend-mode: overlay; color: white !important; }
+                @keyframes liquid-wave { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+                @keyframes bubbles-rise { 0% { transform: translateY(10px); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-20px); opacity: 0; } }
