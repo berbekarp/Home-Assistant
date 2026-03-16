@@ -3,6 +3,8 @@
 Különböző kártyák érhetők el különböző entitások számára:
 
 - 🔋 [Battery card](cards/battery.md)
+- 🔋 [Akkumulátorok Dashboard (Fülekkel)](cards/battery_tabs.md)
+- ⚡ [Energia Fogyasztás Dashboard (Minta)](cards/energy_dashboard.md)
 - 💡 [Light card](cards/light.md)
 - 🚪 [Door/Window Lock sensor card](cards/door_window_lock_sensor.md)
 - 🌊 [Water sensor card](cards/water_sensor.md)
