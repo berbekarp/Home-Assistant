@@ -10,8 +10,6 @@ A kód különlegessége, hogy **YAML Horgonyokat (Anchors)** használ (`&akku_a
 
 Így néz ki a helyiségekre bontott akkumulátor panel:
 
-![Akkumulátor Panel](../images/battery_tabs.png)
-
 *(A kártya dinamikus megjelenése, a folyadékszint hullámzása és a színek változása működés közben:)*
 ![Akkumulátor Animáció](../images/battery_tabs.gif)
 
