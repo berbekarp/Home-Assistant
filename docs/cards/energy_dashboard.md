@@ -11,6 +11,7 @@ A dizájn fénypontjai a bekapcsolt állapotban pulzáló főkapcsoló, a kompak
 Így néz ki a dinamikus energiamonitorozó panel működés közben:
 
 *(A kártya animációi, a grafikonok betöltése és a főkapcsoló pulzálása:)*
+
 ![Energia Animáció](../images/energy_panel.gif)
 
 ---
@@ -184,4 +185,4 @@ Ezt a kódot a dashboard **Nyers konfigurációs szerkesztőjébe (Raw configura
 
 > **Tipp a kalibráláshoz:** A `color_thresholds` alatti `value:` értékeket az adott eszköz fogyasztási szokásaihoz érdemes igazítani. Például egy mosógépnél a piros riasztási zóna (érték) sokkal magasabb legyen, mint egy éjjeli lámpánál!
 
-```
+
