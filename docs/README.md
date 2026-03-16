@@ -29,3 +29,13 @@ Ez a repó egyedi Python szkripteket és javításokat (quirk) is tartalmaz az o
 ### 📂 Zigbee
 * **`snzb01m.py`**: Egyedi ZHA Quirk (javítófájl) a Sonoff SNZB-01M (Orb 4-in-1) vezeték nélküli okosgombhoz. Mivel a Home Assistant beépített ZHA integrációja alapértelmezetten nem értelmezi tökéletesen az eszköz egyedi adatcsatornáját (a 4-es gomb például egyáltalán nem működik nélküle), ez a fájl "fordítóként" funkcionál. Biztosítja, hogy mind a 4 fizikai gomb megbízhatóan, a megfelelő eseményekkel (pl. `remote_button_short_press`) működjön a rendszerben.
   * 📖 **[Részletes beállítási útmutató a Wikiben](https://github.com/berbekarp/Home-Assistant/wiki/Sonoff-SNZB-01M)**
+  
+---
+
+## ☕ Támogatás (Support)
+
+Ha hasznosnak találod ezeket a Home Assistant kártyákat és dashboardokat, és szeretnéd megköszönni a fejlesztésükbe és dokumentálásukba fektetett időt, egy virtuális kávéval megteheted! Bármilyen apró támogatást hatalmas köszönettel fogadok. 🙏
+
+[![Revolut](https://img.shields.io/badge/Revolut-Support-black?style=for-the-badge&logo=revolut)](https://revolut.me/berbekarp)
+
+**Revolut azonosító:** `@berbekarp`  
